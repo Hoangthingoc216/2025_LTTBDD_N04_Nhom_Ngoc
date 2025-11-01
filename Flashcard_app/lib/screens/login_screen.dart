@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:Flashcard_app/services/auth_service.dart';
+import 'package:flashcard_app/services/auth_service.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -48,7 +49,7 @@ class LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                          color: Color(0xFF0066FF),
                         ),
                       ),
 
@@ -243,7 +244,13 @@ class LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 8),
                       TextButton(
                         onPressed: () {
-                          // Xử lý tạo tài khoản
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RegisterScreen(),
+                            ),
+                          );
                         },
                         child: Text(
                           'Create an Account',
