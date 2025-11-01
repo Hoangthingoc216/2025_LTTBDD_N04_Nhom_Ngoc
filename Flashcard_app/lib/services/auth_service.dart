@@ -5,7 +5,6 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  // Đăng nhập
   Future<User?> signInWithEmailAndPassword({
     required String email,
     required String password,
@@ -23,7 +22,6 @@ class AuthService {
     }
   }
 
-  // Đăng ký
   Future<User?> registerWithEmailAndPassword({
     required String email,
     required String password,
@@ -41,7 +39,6 @@ class AuthService {
     }
   }
 
-  // Lấy người dùng hiện tại
   Future<User?> getCurrentUser() async {
     return _auth.currentUser;
   }
@@ -69,7 +66,6 @@ class AuthService {
     }
   }
 
-  // Đăng xuất
   Future<void> signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();

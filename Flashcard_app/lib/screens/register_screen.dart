@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/services/auth_service.dart';
+import 'package:flashcard_app/screens/home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -17,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           color: Color(0xFF0066FF),
                         ),
                       ),
+
                       const SizedBox(height: 32),
+
                       TextField(
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -66,7 +70,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           fillColor: Colors.grey[50],
                         ),
                       ),
+
                       const SizedBox(height: 20),
+
                       TextField(
                         controller: _passwordController,
                         obscureText: _obscurePassword,
@@ -80,11 +86,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           fillColor: Colors.grey[50],
                         ),
                       ),
+
                       const SizedBox(height: 20),
+
                       TextField(
                         controller:
                             _confirmPasswordController,
-                        obscureText: _obscurePassword,
+                        obscureText:
+                            _obscureConfirmPassword,
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
                           border: OutlineInputBorder(
@@ -95,7 +104,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           fillColor: Colors.grey[50],
                         ),
                       ),
+
                       const SizedBox(height: 24),
+
                       SizedBox(
                         width: double.infinity,
                         height: 50,
@@ -133,7 +144,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                             if (user != null) {
                               print('Đăng ký thành công!');
-                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      HomeScreen(),
+                                ),
+                              );
                             } else {
                               print('Đăng ký thất bại!');
                             }

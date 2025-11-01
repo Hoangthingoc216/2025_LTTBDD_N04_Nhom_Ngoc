@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/services/auth_service.dart';
 import 'register_screen.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -143,6 +144,13 @@ class LoginScreenState extends State<LoginScreen> {
                                 );
                             if (user != null) {
                               print('Đăng nhập thành công');
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      HomeScreen(),
+                                ),
+                              );
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -195,6 +203,13 @@ class LoginScreenState extends State<LoginScreen> {
                               print(
                                 "Đăng nhập Google thành công: ${user.email}",
                               );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      HomeScreen(),
+                                ),
+                              );
                             } else {
                               print(
                                 "Đăng nhập Google thất bại",
@@ -229,9 +244,7 @@ class LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 16),
                       TextButton(
-                        onPressed: () {
-                          // Xử lý quên mật khẩu
-                        },
+                        onPressed: () {},
                         child: Text(
                           'Forgot Password?',
                           style: TextStyle(
