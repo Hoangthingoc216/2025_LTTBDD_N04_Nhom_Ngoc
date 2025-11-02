@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
 class FlashcardTopic {
-  final String title; // Tên chủ đề
-  final List<Map<String, String>>
-  words; // Danh sách các từ (word + meaning)
+  String? id;
+  String title;
+  List<Map<String, String>> words;
 
-  FlashcardTopic({
-    required this.title,
-    required this.words,
-  });
+  FlashcardTopic({this.id, required this.title, required this.words});
+
+  Map<String, dynamic> toMap() {
+    return {'title': title, 'words': words};
+  }
+
+  factory FlashcardTopic.fromFirestore(String id, Map<String, dynamic> data) {
+    return FlashcardTopic(
+      id: id,
+      title: data['title'] ?? '',
+      words: List<Map<String, String>>.from(data['words'] ?? []),
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
+import 'package:flashcard_app/screens/flashcard_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -14,6 +15,15 @@ class HomeScreen extends StatefulWidget {
         {"Fish": "Con cá"},
       ],
     ),
+
+    FlashcardTopic(
+      title: "Transportation",
+      words: [
+        {"Bus": "Xe buýt"},
+        {"Car": "Xe hơi"},
+      ],
+    ),
+
     FlashcardTopic(
       title: "Fruits",
       words: [
@@ -69,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             ListTile(
+              dense: true,
               leading: Icon(Icons.home),
               title: Text("Home"),
               onTap: () {
@@ -82,6 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text("Flashcards"),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FlashcardScreen()),
+                );
               },
             ),
 
@@ -135,19 +150,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: widget.topics.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  childAspectRatio: 1.5 / 0.8,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
+                  childAspectRatio: 3 / 1.3,
+                  crossAxisSpacing: 14,
+                  mainAxisSpacing: 14,
                 ),
                 itemBuilder: (context, index) {
                   final topic = widget.topics[index];
                   final color = cardColors[index % cardColors.length];
 
                   return InkWell(
-                    onTap: () {
-                      print("Mở chủ đề ${topic.title}");
-                    },
-                    hoverColor: Color.fromARGB(255, 238, 144, 175),
+                    onTap: () {},
+                    hoverColor: Color.fromARGB(255, 192, 65, 107),
                     borderRadius: BorderRadius.circular(16),
                     child: Container(
                       decoration: BoxDecoration(

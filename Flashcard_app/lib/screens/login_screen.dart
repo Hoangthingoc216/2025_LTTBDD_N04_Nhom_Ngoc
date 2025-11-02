@@ -122,7 +122,9 @@ class LoginScreenState extends State<LoginScreen> {
                                   password: password,
                                 );
                             if (user != null) {
-                              print('Đăng nhập thành công');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Đăng nhập thành công')),
+                              );
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -168,8 +170,8 @@ class LoginScreenState extends State<LoginScreen> {
                           onPressed: () async {
                             var user = await AuthService().signInWithGoogle();
                             if (user != null) {
-                              print(
-                                "Đăng nhập Google thành công: ${user.email}",
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Đăng nhập thành công')),
                               );
                               Navigator.pushReplacement(
                                 context,
@@ -178,7 +180,11 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                               );
                             } else {
-                              print("Đăng nhập Google thất bại");
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Đăng nhập Google thất bại'),
+                                ),
+                              );
                             }
                           },
                           icon: Image.asset('imgs/google_logo.png', height: 24),
