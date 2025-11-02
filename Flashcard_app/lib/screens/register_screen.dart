@@ -6,15 +6,12 @@ class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() =>
-      _RegisterScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _emailController =
-      TextEditingController();
-  final TextEditingController _passwordController =
-      TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   bool _obscurePassword = true;
@@ -40,9 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Container(
-                  constraints: const BoxConstraints(
-                    maxWidth: 400,
-                  ),
+                  constraints: const BoxConstraints(maxWidth: 400),
                   padding: const EdgeInsets.all(32.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -63,8 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           filled: true,
                           fillColor: Colors.grey[50],
@@ -79,8 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           filled: true,
                           fillColor: Colors.grey[50],
@@ -90,15 +83,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 20),
 
                       TextField(
-                        controller:
-                            _confirmPasswordController,
-                        obscureText:
-                            _obscureConfirmPassword,
+                        controller: _confirmPasswordController,
+                        obscureText: _obscureConfirmPassword,
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           filled: true,
                           fillColor: Colors.grey[50],
@@ -112,25 +102,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () async {
-                            String email = _emailController
-                                .text
+                            String email = _emailController.text.trim();
+                            String password = _passwordController.text.trim();
+                            String confirm = _confirmPasswordController.text
                                 .trim();
-                            String password =
-                                _passwordController.text
-                                    .trim();
-                            String confirm =
-                                _confirmPasswordController
-                                    .text
-                                    .trim();
 
                             if (password != confirm) {
-                              ScaffoldMessenger.of(
-                                context,
-                              ).showSnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text(
-                                    'Mật khẩu không khớp',
-                                  ),
+                                  content: Text('Mật khẩu không khớp'),
                                 ),
                               );
                               return;
@@ -147,8 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      HomeScreen(),
+                                  builder: (context) => HomeScreen(),
                                 ),
                               );
                             } else {
@@ -156,13 +135,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                              0xFF0066FF,
-                            ),
+                            backgroundColor: const Color(0xFF0066FF),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                           child: const Text(

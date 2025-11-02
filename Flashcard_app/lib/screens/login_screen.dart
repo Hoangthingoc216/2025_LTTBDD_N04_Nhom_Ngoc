@@ -11,10 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController =
-      TextEditingController();
-  final TextEditingController _passwordController =
-      TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
   @override
@@ -38,9 +36,7 @@ class LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 400,
-                  ),
+                  constraints: BoxConstraints(maxWidth: 400),
                   padding: const EdgeInsets.all(32.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -59,19 +55,13 @@ class LoginScreenState extends State<LoginScreen> {
                         controller: _emailController,
                         decoration: InputDecoration(
                           labelText: 'Email',
-                          labelStyle: TextStyle(
-                            color: Colors.grey[600],
-                          ),
+                          labelStyle: TextStyle(color: Colors.grey[600]),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                              color: Colors.grey[300]!,
-                            ),
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: Colors.grey[300]!),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
                               color: Color(0xFF0066FF),
                               width: 2,
@@ -87,19 +77,13 @@ class LoginScreenState extends State<LoginScreen> {
                         controller: _passwordController,
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle: TextStyle(
-                            color: Colors.grey[600],
-                          ),
+                          labelStyle: TextStyle(color: Colors.grey[600]),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                              color: Colors.grey[300]!,
-                            ),
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: Colors.grey[300]!),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
                               color: Color(0xFF0066FF),
                               width: 2,
@@ -116,8 +100,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             onPressed: () {
                               setState(() {
-                                _obscurePassword =
-                                    !_obscurePassword;
+                                _obscurePassword = !_obscurePassword;
                               });
                             },
                           ),
@@ -131,12 +114,8 @@ class LoginScreenState extends State<LoginScreen> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () async {
-                            String email = _emailController
-                                .text
-                                .trim();
-                            String password =
-                                _passwordController.text
-                                    .trim();
+                            String email = _emailController.text.trim();
+                            String password = _passwordController.text.trim();
                             var user = await AuthService()
                                 .signInWithEmailAndPassword(
                                   email: email,
@@ -147,20 +126,16 @@ class LoginScreenState extends State<LoginScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      HomeScreen(),
+                                  builder: (context) => HomeScreen(),
                                 ),
                               );
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(
-                              0xFF0066FF,
-                            ),
+                            backgroundColor: Color(0xFF0066FF),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             elevation: 2,
                           ),
@@ -177,18 +152,12 @@ class LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 16),
                       Row(
                         children: const [
-                          Expanded(
-                            child: Divider(thickness: 1),
-                          ),
+                          Expanded(child: Divider(thickness: 1)),
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text("or"),
                           ),
-                          Expanded(
-                            child: Divider(thickness: 1),
-                          ),
+                          Expanded(child: Divider(thickness: 1)),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -197,8 +166,7 @@ class LoginScreenState extends State<LoginScreen> {
                         height: 50,
                         child: ElevatedButton.icon(
                           onPressed: () async {
-                            var user = await AuthService()
-                                .signInWithGoogle();
+                            var user = await AuthService().signInWithGoogle();
                             if (user != null) {
                               print(
                                 "Đăng nhập Google thành công: ${user.email}",
@@ -206,20 +174,14 @@ class LoginScreenState extends State<LoginScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      HomeScreen(),
+                                  builder: (context) => HomeScreen(),
                                 ),
                               );
                             } else {
-                              print(
-                                "Đăng nhập Google thất bại",
-                              );
+                              print("Đăng nhập Google thất bại");
                             }
                           },
-                          icon: Image.asset(
-                            'imgs/google_logo.png',
-                            height: 24,
-                          ),
+                          icon: Image.asset('imgs/google_logo.png', height: 24),
                           label: const Text(
                             'Đăng nhập',
                             style: TextStyle(
@@ -231,11 +193,8 @@ class LoginScreenState extends State<LoginScreen> {
                             backgroundColor: Colors.white,
                             foregroundColor: Colors.black87,
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(8),
-                              side: const BorderSide(
-                                color: Colors.grey,
-                              ),
+                              borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(color: Colors.grey),
                             ),
                             elevation: 1,
                           ),
@@ -260,8 +219,7 @@ class LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  RegisterScreen(),
+                              builder: (context) => RegisterScreen(),
                             ),
                           );
                         },
