@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
 import 'package:flashcard_app/screens/flashcard_screen.dart';
+import 'package:flashcard_app/services/firestore_service.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -15,7 +16,6 @@ class HomeScreen extends StatefulWidget {
         {"Fish": "Con cá"},
       ],
     ),
-
     FlashcardTopic(
       title: "Transportation",
       words: [
@@ -23,7 +23,6 @@ class HomeScreen extends StatefulWidget {
         {"Car": "Xe hơi"},
       ],
     ),
-
     FlashcardTopic(
       title: "Fruits",
       words: [
@@ -51,12 +50,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final FirestoreService firestoreService = FirestoreService();
   final List<Color> cardColors = [
     Color.fromARGB(255, 235, 245, 236),
-    Color.fromARGB(255, 245, 248, 250),
+    Color.fromARGB(255, 66, 134, 180),
     Color.fromARGB(255, 242, 241, 237),
     Color.fromARGB(255, 247, 246, 249),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
               },
             ),
-
             ListTile(
               dense: true,
               leading: Icon(Icons.auto_stories),
@@ -102,13 +102,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ListTile(
               dense: true,
+              leading: Icon(Icons.book),
+              title: Text("Study"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StudyScreen()),
+                );
+              },
+            ),
+            ListTile(
+              dense: true,
               leading: Icon(Icons.settings),
               title: Text("Settings"),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
-
             ListTile(
               dense: true,
               leading: const Icon(Icons.person),
@@ -117,7 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
               },
             ),
-
             ListTile(
               dense: true,
               leading: Icon(Icons.logout),
@@ -143,61 +153,78 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.black,
               ),
             ),
+
             SizedBox(height: 16),
 
             Expanded(
-              child: GridView.builder(
-                itemCount: widget.topics.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 3 / 1.3,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                ),
-                itemBuilder: (context, index) {
-                  final topic = widget.topics[index];
-                  final color = cardColors[index % cardColors.length];
+              child: StreamBuilder<List<FlashcardTopic>>(
+                stream: FirestoreService().getFlashcardTopics(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasData == false || snapshot.data!.isEmpty) {
+                    return Center(child: Text("Không có chủ đề nào."));
+                  }
+                  final topics = snapshot.data!;
 
-                  return InkWell(
-                    onTap: () {},
-                    hoverColor: Color.fromARGB(255, 192, 65, 107),
-                    borderRadius: BorderRadius.circular(16),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              topic.title,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "${topic.words.length} từ",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                  return GridView.builder(
+                    itemCount: topics.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 3 / 1.3,
+                      crossAxisSpacing: 14,
+                      mainAxisSpacing: 14,
                     ),
+
+                    itemBuilder: (context, index) {
+                      final topic = topics[index];
+                      final color = cardColors[index % cardColors.length];
+
+                      return InkWell(
+                        onTap: () {},
+                        hoverColor: Color.fromARGB(255, 192, 65, 107),
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  topic.title,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                SizedBox(height: 4),
+
+                                Text(
+                                  "${topic.words.length} từ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),

@@ -8,15 +8,14 @@ class FirestoreService {
     await data.collection('flashcard_topics').add(topic.toMap());
   }
 
-  Future<List<FlashcardTopic>> getFlashcardTopics() async {
-    QuerySnapshot snapshot = await data.collection('flashcard_topics').get();
-    return snapshot.docs
-        .map(
-          (doc) => FlashcardTopic.fromFirestore(
-            doc.id,
-            doc.data() as Map<String, dynamic>,
-          ),
-        )
-        .toList();
+  Stream<List<FlashcardTopic>> getFlashcardTopics() {
+    return data.collection('flashcard_topics').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return FlashcardTopic.fromFirestore(
+          doc.id,
+          doc.data() as Map<String, dynamic>,
+        );
+      }).toList();
+    });
   }
 }
