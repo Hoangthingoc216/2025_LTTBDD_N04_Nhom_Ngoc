@@ -11,9 +11,7 @@ class FlashcardTopic {
     return {
       'title': title,
       'words': words.map((word) {
-        final en = word.keys.first;
-        final vi = word.values.first;
-        return {'en': en, 'vi': vi};
+        return {'en': word['en'] ?? '', 'vi': word['vi'] ?? ''};
       }).toList(),
     };
   }
@@ -25,7 +23,7 @@ class FlashcardTopic {
     final words = (wordList as List).map((item) {
       final en = item['en']?.toString() ?? '';
       final vi = item['vi']?.toString() ?? '';
-      return {en: vi};
+      return {'en': en, 'vi': vi};
     }).toList();
 
     return FlashcardTopic(id: id, title: title, words: words);

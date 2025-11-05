@@ -2,45 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
 import 'package:flashcard_app/screens/flashcard_screen.dart';
 import 'package:flashcard_app/services/firestore_service.dart';
+import 'package:flashcard_app/screens/study_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
   final List<FlashcardTopic> topics = [
     FlashcardTopic(
-      title: "Animals",
+      title: "Fruits",
       words: [
-        {"Dog": "Con chó"},
-        {"Cat": "Con mèo"},
-        {"Elephant": "Con voi"},
-        {"Bird": "Con chim"},
-        {"Fish": "Con cá"},
+        {"en": "Grape", "vi": "QUả nho"},
+        {"en": "Apple", "vi": "Quả táo"},
+        {"en": "Coconut", "vi": "Quả dừa"},
       ],
     ),
     FlashcardTopic(
       title: "Transportation",
       words: [
-        {"Bus": "Xe buýt"},
-        {"Car": "Xe hơi"},
-      ],
-    ),
-    FlashcardTopic(
-      title: "Fruits",
-      words: [
-        {"Apple": "Quả táo"},
-        {"Banana": "Quả chuối"},
-        {"Mango": "Quả xoài"},
-        {"Orange": "Quả cam"},
-        {"Grape": "Quả nho"},
-      ],
-    ),
-    FlashcardTopic(
-      title: "Colors",
-      words: [
-        {"Red": "Màu đỏ"},
-        {"Blue": "Màu xanh dương"},
-        {"Green": "Màu xanh lá"},
-        {"Yellow": "Màu vàng"},
-        {"Purple": "Màu tím"},
+        {"en": "Bus", "vi": "Xe buýt"},
+        {"en": "Car", "vi": "Xe hơi"},
       ],
     ),
   ];
@@ -108,7 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => StudyScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => StudyScreen(topic: widget.topics[0]),
+                  ),
                 );
               },
             ),
@@ -182,7 +163,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       final color = cardColors[index % cardColors.length];
 
                       return InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => StudyScreen(topic: topic),
+                            ),
+                          );
+                        },
                         hoverColor: Color.fromARGB(255, 192, 65, 107),
                         borderRadius: BorderRadius.circular(16),
                         child: Container(
