@@ -46,7 +46,7 @@ class LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF0066FF),
+                          color: const Color.fromARGB(255, 246, 123, 193),
                         ),
                       ),
 
@@ -63,7 +63,7 @@ class LoginScreenState extends State<LoginScreen> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
-                              color: Color(0xFF0066FF),
+                              color: Color.fromARGB(255, 246, 123, 193),
                               width: 2,
                             ),
                           ),
@@ -85,7 +85,7 @@ class LoginScreenState extends State<LoginScreen> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
-                              color: Color(0xFF0066FF),
+                              color: Color.fromARGB(255, 246, 123, 193),
                               width: 2,
                             ),
                           ),
@@ -134,7 +134,7 @@ class LoginScreenState extends State<LoginScreen> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF0066FF),
+                            backgroundColor: Color.fromARGB(255, 246, 123, 193),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -213,7 +213,7 @@ class LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Forgot Password?',
                           style: TextStyle(
-                            color: Color(0xFF0066FF),
+                            color: Color.fromARGB(255, 246, 123, 193),
                             fontSize: 14,
                           ),
                         ),
@@ -232,7 +232,7 @@ class LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Create an Account',
                           style: TextStyle(
-                            color: Color(0xFF0066FF),
+                            color: Color.fromARGB(255, 246, 123, 193),
                             fontSize: 14,
                           ),
                         ),
