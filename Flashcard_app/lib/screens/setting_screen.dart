@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flashcard_app/language.dart';
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -56,28 +57,30 @@ class _SettingScreenState extends State<SettingScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Chọn ngôn ngữ"),
+        title: Text(Language.dich("Chọn ngôn ngữ", "Choose language")),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile(
-              title: Text("Tiếng Việt"),
+              title: Text(Language.dich("Tiếng Việt", "Vietnamese")),
               value: "Vietnamese",
               groupValue: NgonNgu,
               onChanged: (value) {
                 setState(() {
                   NgonNgu = value!;
+                  Language.DoiNgonNgu(value);
                 });
                 Navigator.pop(context);
               },
             ),
             RadioListTile(
-              title: Text("English"),
+              title: Text(Language.dich("Tiếng Anh", "English")),
               value: "English",
               groupValue: NgonNgu,
               onChanged: (value) {
                 setState(() {
                   NgonNgu = value!;
+                  Language.DoiNgonNgu(value);
                 });
                 Navigator.pop(context);
               },
@@ -103,14 +106,17 @@ class _SettingScreenState extends State<SettingScreen> {
         children: [
           ListTile(
             leading: Icon(Icons.person),
-            title: Text('Tài khoản của tôi'),
-            subtitle: Text(user?.email ?? "Chưa đăng nhập"),
+            title: Text(Language.dich('Tài khoản của tôi', 'My account')),
+            subtitle: Text(
+              user?.email ??
+                  Language.dich('Chưa đăng nhập', 'Do not have an account yet'),
+            ),
           ),
           Divider(),
 
           ListTile(
             leading: Icon(Icons.lock_reset_outlined),
-            title: Text('Đổi mật khẩu'),
+            title: Text(Language.dich('Đổi mật khẩu', 'Change Paswords')),
             onTap: () {
               DoiMatKhau(context);
             },
@@ -118,7 +124,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
           ListTile(
             leading: Icon(Icons.translate),
-            title: Text('Ngôn Ngữ'),
+            title: Text(Language.dich('Ngôn ngữ', 'Language')),
             subtitle: Text(NgonNgu),
             onTap: () {
               DoiNgonNgu(context);

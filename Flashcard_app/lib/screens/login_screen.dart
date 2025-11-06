@@ -3,6 +3,7 @@ import 'package:flashcard_app/services/auth_service.dart';
 import 'package:flashcard_app/screens/login_screen.dart';
 import 'register_screen.dart';
 import 'home_screen.dart';
+import 'package:flashcard_app/language.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,8 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController QLEmail = TextEditingController();
+  final TextEditingController QLyMatKhau = TextEditingController();
   bool _obscurePassword = true;
 
   @override
@@ -43,7 +44,7 @@ class LoginScreenState extends State<LoginScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Sign In',
+                        Language.dich("Đăng nhập", "Login"),
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -53,7 +54,7 @@ class LoginScreenState extends State<LoginScreen> {
 
                       SizedBox(height: 32),
                       TextField(
-                        controller: _emailController,
+                        controller: QLEmail,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.grey[600]),
@@ -75,7 +76,7 @@ class LoginScreenState extends State<LoginScreen> {
 
                       SizedBox(height: 20),
                       TextField(
-                        controller: _passwordController,
+                        controller: QLyMatKhau,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: TextStyle(color: Colors.grey[600]),
@@ -115,8 +116,8 @@ class LoginScreenState extends State<LoginScreen> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () async {
-                            String email = _emailController.text.trim();
-                            String password = _passwordController.text.trim();
+                            String email = QLEmail.text.trim();
+                            String password = QLyMatKhau.text.trim();
                             var user = await AuthService()
                                 .signInWithEmailAndPassword(
                                   email: email,
@@ -124,7 +125,14 @@ class LoginScreenState extends State<LoginScreen> {
                                 );
                             if (user != null) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Đăng nhập thành công')),
+                                SnackBar(
+                                  content: Text(
+                                    Language.dich(
+                                      "Đăng nhập thành công",
+                                      "Log in successfully",
+                                    ),
+                                  ),
+                                ),
                               );
                               Navigator.pushReplacement(
                                 context,
@@ -143,7 +151,7 @@ class LoginScreenState extends State<LoginScreen> {
                             elevation: 2,
                           ),
                           child: Text(
-                            'Login',
+                            Language.dich('Đăng nhập', 'Login'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -173,7 +181,14 @@ class LoginScreenState extends State<LoginScreen> {
                             var user = await AuthService().signInWithGoogle();
                             if (user != null) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Đăng nhập thành công')),
+                                SnackBar(
+                                  content: Text(
+                                    Language.dich(
+                                      "Đăng nhập thành công",
+                                      "Log in successfully",
+                                    ),
+                                  ),
+                                ),
                               );
                               Navigator.pushReplacement(
                                 context,
@@ -184,14 +199,19 @@ class LoginScreenState extends State<LoginScreen> {
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Đăng nhập Google thất bại'),
+                                  content: Text(
+                                    Language.dich(
+                                      "Đăng nhập Google thất bại",
+                                      "Login failed",
+                                    ),
+                                  ),
                                 ),
                               );
                             }
                           },
                           icon: Image.asset('imgs/google_logo.png', height: 24),
                           label: Text(
-                            'Đăng nhập',
+                            Language.dich("Đăng nhập", "Login"),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -213,7 +233,10 @@ class LoginScreenState extends State<LoginScreen> {
                       TextButton(
                         onPressed: () {},
                         child: Text(
-                          'Forgot Password?',
+                          Language.dich(
+                            "Bạn quên mật khẩu?",
+                            "Forgot password?",
+                          ),
                           style: TextStyle(
                             color: Color.fromARGB(255, 246, 123, 193),
                             fontSize: 14,
@@ -232,7 +255,7 @@ class LoginScreenState extends State<LoginScreen> {
                           );
                         },
                         child: Text(
-                          'Create an Account',
+                          Language.dich("Đăng ký", "Create an account"),
                           style: TextStyle(
                             color: Color.fromARGB(255, 246, 123, 193),
                             fontSize: 14,

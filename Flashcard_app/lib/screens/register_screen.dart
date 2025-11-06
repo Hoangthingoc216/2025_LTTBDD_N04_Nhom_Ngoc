@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/services/auth_service.dart';
 import 'package:flashcard_app/screens/home_screen.dart';
+import 'package:flashcard_app/language.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -10,10 +11,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController QLEmail = TextEditingController();
+  final TextEditingController QLyMatKhau = TextEditingController();
+  final TextEditingController QLXacNhanMatKhau = TextEditingController();
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
 
@@ -30,20 +30,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(24.0),
               child: Card(
                 elevation: 8,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 400),
-                  padding: const EdgeInsets.all(32.0),
+                  constraints: BoxConstraints(maxWidth: 400),
+                  padding: EdgeInsets.all(32.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        'Create Account',
+                      Text(
+                        Language.dich("Đăng ký", "Create an account"),
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -51,10 +51,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32),
 
                       TextField(
-                        controller: _emailController,
+                        controller: QLEmail,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(
@@ -65,10 +65,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
 
                       TextField(
-                        controller: _passwordController,
+                        controller: QLyMatKhau,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
                           labelText: 'Password',
@@ -80,10 +80,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
 
                       TextField(
-                        controller: _confirmPasswordController,
+                        controller: QLXacNhanMatKhau,
                         obscureText: _obscureConfirmPassword,
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
@@ -95,22 +95,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
 
                       SizedBox(
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () async {
-                            String email = _emailController.text.trim();
-                            String password = _passwordController.text.trim();
-                            String confirm = _confirmPasswordController.text
-                                .trim();
+                            String email = QLEmail.text.trim();
+                            String password = QLyMatKhau.text.trim();
+                            String confirm = QLXacNhanMatKhau.text.trim();
 
                             if (password != confirm) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Mật khẩu không khớp'),
+                                SnackBar(
+                                  content: Text(
+                                    Language.dich(
+                                      "Mật khẩu không khớp",
+                                      "Passwords do no match",
+                                    ),
+                                  ),
                                 ),
                               );
                               return;
@@ -123,7 +127,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 );
 
                             if (user != null) {
-                              print('Đăng ký thành công!');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    Language.dich(
+                                      "Đăng ký thành công",
+                                      "Registered successfully",
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.green,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -131,18 +147,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               );
                             } else {
-                              print('Đăng ký thất bại!');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    Language.dich(
+                                      "Đăng ký thành công",
+                                      "Registered flaied",
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.red,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF0066FF),
+                            backgroundColor: Color(0xFF0066FF),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text(
-                            'Register',
+                          child: Text(
+                            Language.dich("Đăng ký ", "Register"),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -155,8 +182,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: const Text(
-                          'Already have an account? Login',
+                        child: Text(
+                          Language.dich(
+                            "Bạn đã có tài khoản? Đăng nhập ",
+                            "Already have an account? Login",
+                          ),
                           style: TextStyle(
                             color: Color(0xFF0066FF),
                             fontSize: 14,

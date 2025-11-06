@@ -1,7 +1,7 @@
 import 'dart:math';
+import 'package:flashcard_app/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
-import 'package:flashcard_app/widgets/flashcard_widget.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class StudyScreen extends StatefulWidget {
@@ -62,10 +62,13 @@ class _StudyScreenState extends State<StudyScreen>
     setState(() {
       DaKiemTra = true;
       if (CauTraLoi == TiengAnh.toLowerCase()) {
-        phanHoi = " Chính xác!";
+        phanHoi = Language.dich('Chính xác', 'Correct');
         SoCauDung++;
       } else {
-        phanHoi = "Sai rồi! Đáp án đúng là: $TiengAnh";
+        phanHoi = Language.dich(
+          "Sai rồi! Đáp án đúng là: $TiengAnh",
+          "Wrong! The correct answer is: $TiengAnh",
+        );
       }
     });
   }
@@ -138,7 +141,7 @@ class _StudyScreenState extends State<StudyScreen>
                   SizedBox(width: 12),
 
                   Text(
-                    'Ôn tập từ vựng',
+                    Language.dich('Ôn tập từ vựng', 'Vocabulary review'),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -155,7 +158,9 @@ class _StudyScreenState extends State<StudyScreen>
                     Navigator.pop(context);
                   },
                   icon: Icon(Icons.arrow_back, size: 18),
-                  label: Text('Quay lại danh sách'),
+                  label: Text(
+                    Language.dich('Quay lại danh sách', 'Back to the list'),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF5B7FFF),
                     foregroundColor: Colors.white,
@@ -282,7 +287,10 @@ class _StudyScreenState extends State<StudyScreen>
                         controller: NhapCauTraLoi,
                         enabled: !DaKiemTra,
                         decoration: InputDecoration(
-                          hintText: 'Nhập từ tiếng Anh...',
+                          hintText: Language.dich(
+                            'Nhập từ tiếng Anh...',
+                            'Enter words..',
+                          ),
                           hintStyle: TextStyle(color: Colors.grey[400]),
                           filled: true,
                           fillColor: Colors.white,
@@ -363,12 +371,18 @@ class _StudyScreenState extends State<StudyScreen>
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: phanHoi.contains("Chính xác")
+                        color:
+                            phanHoi.contains(
+                              Language.dich("Chính xác", "Correct"),
+                            )
                             ? Colors.green[50]
                             : Colors.red[50],
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: phanHoi.contains("Chính xác")
+                          color:
+                              phanHoi.contains(
+                                Language.dich("Chính xác", "Correct"),
+                              )
                               ? Colors.green
                               : Colors.red,
                           width: 2,
@@ -379,7 +393,10 @@ class _StudyScreenState extends State<StudyScreen>
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: phanHoi.contains("Chính xác")
+                          color:
+                              phanHoi.contains(
+                                Language.dich("Chính xác", "Correct"),
+                              )
                               ? Colors.green[700]
                               : Colors.red[700],
                         ),
@@ -410,7 +427,7 @@ class _StudyScreenState extends State<StudyScreen>
                         SizedBox(height: 20),
 
                         Text(
-                          'Hoàn thành!',
+                          Language.dich('Hoàn thành!', 'Complete'),
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -420,7 +437,10 @@ class _StudyScreenState extends State<StudyScreen>
                         SizedBox(height: 15),
 
                         Text(
-                          'Bạn đã trả lời đúng $SoCauDung/${widget.topic.words.length} từ',
+                          Language.dich(
+                            'Bạn đã trả lời đúng $SoCauDung/${widget.topic.words.length} từ',
+                            'You answered $SoCauDung/${widget.topic.words.length} words correctly',
+                          ),
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.grey[700],
@@ -442,7 +462,10 @@ class _StudyScreenState extends State<StudyScreen>
                             ),
                           ),
                           child: Text(
-                            'Kết thúc ôn luyện',
+                            Language.dich(
+                              'Kết thúc ôn luyện',
+                              'End of training',
+                            ),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,

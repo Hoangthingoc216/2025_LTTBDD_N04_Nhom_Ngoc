@@ -1,3 +1,4 @@
+import 'package:flashcard_app/language.dart';
 import 'package:flashcard_app/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               dense: true,
               leading: Icon(Icons.home),
-              title: Text("Home"),
+              title: Text(Language.dich("Trang chủ", "Home")),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               dense: true,
               leading: Icon(Icons.book),
-              title: Text("Study"),
+              title: Text(Language.dich("Học tập", "Study")),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               dense: true,
               leading: Icon(Icons.settings),
-              title: Text("Settings"),
+              title: Text(Language.dich("Cài đặt", "Settings")),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -104,7 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               dense: true,
               leading: Icon(Icons.person),
-              title: Text("Information"),
+              title: Text(
+                Language.dich("Thông tin cá nhân", "Personal Information"),
+              ),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -112,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               dense: true,
               leading: Icon(Icons.logout),
-              title: Text("Logout"),
+              title: Text(Language.dich("Đăng xuất", "Logout")),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -131,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Chủ đề của bạn nè!",
+              Language.dich("Chủ đề của bạn nè!", "My topics"),
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

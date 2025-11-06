@@ -1,3 +1,4 @@
+import 'package:flashcard_app/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
 import 'package:flashcard_app/services/firestore_service.dart';
@@ -28,7 +29,11 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Create Flashcard Topic')),
+      appBar: AppBar(
+        title: Text(
+          Language.dich('Tạo chủ đề Flashcard', 'Create Flashcard Topic'),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -47,7 +52,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                 itemCount: flashcards.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
+                    padding: EdgeInsets.only(bottom: 12.0),
                     child: Row(
                       children: [
                         Expanded(
@@ -94,7 +99,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                   });
                 });
               },
-              label: Text("Add a card"),
+              label: Text(Language.dich("Thêm thẻ mới", "Add a card")),
               icon: Icon(Icons.add),
             ),
             SizedBox(height: 16),
@@ -104,7 +109,14 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                 final topic = _titleController.text.trim();
                 if (topic.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Vui long nhập tiêu đề')),
+                    SnackBar(
+                      content: Text(
+                        Language.dich(
+                          'Vui lòng nhập tiêu đề',
+                          'Please enter a title',
+                        ),
+                      ),
+                    ),
                   );
                   return;
                 }
@@ -127,7 +139,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                 );
                 Navigator.pop(context);
               },
-              child: Text('Create'),
+              child: Text(Language.dich('Tạo', 'Create')),
             ),
           ],
         ),
