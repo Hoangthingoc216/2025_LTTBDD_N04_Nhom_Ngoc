@@ -1,3 +1,4 @@
+import 'package:flashcard_app/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
 import 'package:flashcard_app/screens/flashcard_screen.dart';
@@ -94,6 +95,10 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text("Settings"),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingScreen()),
+                );
               },
             ),
             ListTile(
