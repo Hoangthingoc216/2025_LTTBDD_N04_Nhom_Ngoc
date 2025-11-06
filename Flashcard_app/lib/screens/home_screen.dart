@@ -8,23 +8,7 @@ import 'package:flashcard_app/screens/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
-  final List<FlashcardTopic> topics = [
-    FlashcardTopic(
-      title: "Fruits",
-      words: [
-        {"en": "Grape", "vi": "QUả nho"},
-        {"en": "Apple", "vi": "Quả táo"},
-        {"en": "Coconut", "vi": "Quả dừa"},
-      ],
-    ),
-    FlashcardTopic(
-      title: "Transportation",
-      words: [
-        {"en": "Bus", "vi": "Xe buýt"},
-        {"en": "Car", "vi": "Xe hơi"},
-      ],
-    ),
-  ];
+  final List<FlashcardTopic> topics = [];
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -51,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F3F5),
+      backgroundColor: Color(0xFFF9F3F5),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 250, 233, 239),
         title: Text("Flashcard App", style: TextStyle(color: Colors.black)),
@@ -114,8 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ListTile(
               dense: true,
-              leading: const Icon(Icons.person),
-              title: const Text("Information"),
+              leading: Icon(Icons.person),
+              title: Text("Information"),
               onTap: () {
                 Navigator.pop(context);
               },
