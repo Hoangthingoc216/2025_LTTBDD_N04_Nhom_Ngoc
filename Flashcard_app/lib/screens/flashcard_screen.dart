@@ -27,63 +27,83 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF9F3F5),
       appBar: AppBar(
         title: Text(
           Language.dich('Tạo chủ đề Flashcard', 'Create Flashcard Topic'),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                labelText: 'Topic Title',
-                border: OutlineInputBorder(),
+                labelText: Language.dich('Tên chủ đề', 'Topic Title'),
+                prefixIcon: Icon(Icons.title),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
 
             Expanded(
               child: ListView.builder(
                 itemCount: flashcards.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 12.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: flashcards[index]['en'],
-                            decoration: InputDecoration(
-                              labelText: 'English',
-                              border: OutlineInputBorder(),
+                  return Card(
+                    margin: EdgeInsets.only(bottom: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 2,
+                    child: Padding(
+                      padding: EdgeInsets.all(12),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: flashcards[index]['en'],
+                              decoration: InputDecoration(
+                                labelText: 'English',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 12),
+                          SizedBox(width: 12),
 
-                        Expanded(
-                          child: TextField(
-                            controller: flashcards[index]['vi'],
-                            decoration: InputDecoration(
-                              labelText: 'Vietnamese',
-                              border: OutlineInputBorder(),
+                          Expanded(
+                            child: TextField(
+                              controller: flashcards[index]['vi'],
+                              decoration: InputDecoration(
+                                labelText: 'Vietnamese',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              flashcards.removeAt(index);
-                            });
-                          },
-                          icon: Icon(Icons.delete, color: Colors.red),
-                        ),
-                      ],
+
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                flashcards.removeAt(index);
+                              });
+                            },
+                            icon: Icon(Icons.delete, color: Colors.red),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -120,14 +140,12 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                   );
                   return;
                 }
-
                 final flashcardData = flashcards.map((card) {
                   return {
                     'en': card['en']!.text.trim(),
                     'vi': card['vi']!.text.trim(),
                   };
                 }).toList();
-
                 final flashcardTopic = FlashcardTopic(
                   id: '',
                   title: topic,
