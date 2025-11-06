@@ -1,4 +1,5 @@
 import 'package:flashcard_app/language.dart';
+import 'package:flashcard_app/screens/introduce_screen.dart';
 import 'package:flashcard_app/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/models/flashcard_model.dart';
@@ -110,6 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => IntroduceScreen()),
+                );
               },
             ),
             ListTile(
