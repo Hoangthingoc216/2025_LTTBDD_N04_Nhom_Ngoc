@@ -3,6 +3,8 @@ import 'package:flashcard_app/models/flashcard_model.dart';
 import 'package:flashcard_app/screens/flashcard_screen.dart';
 import 'package:flashcard_app/services/firestore_service.dart';
 import 'package:flashcard_app/screens/study_screen.dart';
+import 'package:flashcard_app/services/auth_service.dart';
+import 'package:flashcard_app/screens/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -32,10 +34,19 @@ class _HomeScreenState extends State<HomeScreen> {
   final FirestoreService firestoreService = FirestoreService();
   final List<Color> cardColors = [
     Color.fromARGB(255, 235, 245, 236),
-    Color.fromARGB(255, 66, 134, 180),
+    Color.fromARGB(255, 235, 246, 253),
     Color.fromARGB(255, 242, 241, 237),
     Color.fromARGB(255, 247, 246, 249),
   ];
+
+  void DangXuat(BuildContext context) async {
+    await AuthService().signOut();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text("Logout"),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
               },
             ),
           ],

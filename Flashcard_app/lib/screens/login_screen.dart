@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/services/auth_service.dart';
+import 'package:flashcard_app/screens/login_screen.dart';
 import 'register_screen.dart';
 import 'home_screen.dart';
 
@@ -29,7 +30,7 @@ class LoginScreenState extends State<LoginScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(24.0),
               child: Card(
                 elevation: 8,
                 shape: RoundedRectangleBorder(
@@ -37,7 +38,7 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
                 child: Container(
                   constraints: BoxConstraints(maxWidth: 400),
-                  padding: const EdgeInsets.all(32.0),
+                  padding: EdgeInsets.all(32.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -46,11 +47,11 @@ class LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 246, 123, 193),
+                          color: Color.fromARGB(255, 246, 123, 193),
                         ),
                       ),
 
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32),
                       TextField(
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -72,7 +73,7 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                       TextField(
                         controller: _passwordController,
                         decoration: InputDecoration(
@@ -108,7 +109,7 @@ class LoginScreenState extends State<LoginScreen> {
                         obscureText: _obscurePassword,
                       ),
 
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
                       SizedBox(
                         width: double.infinity,
                         height: 50,
@@ -151,9 +152,9 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Row(
-                        children: const [
+                        children: [
                           Expanded(child: Divider(thickness: 1)),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -162,7 +163,8 @@ class LoginScreenState extends State<LoginScreen> {
                           Expanded(child: Divider(thickness: 1)),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
+
                       SizedBox(
                         width: double.infinity,
                         height: 50,
@@ -188,7 +190,7 @@ class LoginScreenState extends State<LoginScreen> {
                             }
                           },
                           icon: Image.asset('imgs/google_logo.png', height: 24),
-                          label: const Text(
+                          label: Text(
                             'Đăng nhập',
                             style: TextStyle(
                               fontSize: 16,
@@ -200,14 +202,14 @@ class LoginScreenState extends State<LoginScreen> {
                             foregroundColor: Colors.black87,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
-                              side: const BorderSide(color: Colors.grey),
+                              side: BorderSide(color: Colors.grey),
                             ),
                             elevation: 1,
                           ),
                         ),
                       ),
 
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       TextButton(
                         onPressed: () {},
                         child: Text(
@@ -219,7 +221,7 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
