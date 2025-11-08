@@ -81,12 +81,30 @@ class _HomeScreenState extends State<HomeScreen> {
               dense: true,
               leading: Icon(Icons.book),
               title: Text(Language.dich("Học tập", "Study")),
-              onTap: () {
+              onTap: () async {
                 Navigator.pop(context);
+
+                // Lấy danh sách từ Firestore
+                final snapshot = await FirestoreService()
+                    .getFlashcardTopics()
+                    .first;
+
+                if (snapshot.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        Language.dich("Chưa có chủ đề nào!", "No topics yet!"),
+                      ),
+                    ),
+                  );
+                  return;
+                }
+
+                // Chọn topic đầu tiên (có dữ liệu)
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyScreen(topic: widget.topics[0]),
+                    builder: (context) => StudyScreen(topic: snapshot[0]),
                   ),
                 );
               },

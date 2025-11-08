@@ -47,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF0066FF),
+                          color: Color.fromARGB(255, 246, 123, 193),
                         ),
                       ),
 
@@ -162,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF0066FF),
+                            backgroundColor: Color.fromARGB(255, 246, 123, 193),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -188,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             "Already have an account? Login",
                           ),
                           style: TextStyle(
-                            color: Color(0xFF0066FF),
+                            color: Color.fromARGB(255, 246, 123, 193),
                             fontSize: 14,
                           ),
                         ),
